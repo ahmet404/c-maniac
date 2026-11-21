@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "suhu.h"
-#include "panjang.h"
+#include "suhu/suhu.h"
+#include "panjang/panjang.h"
 
 static const char *str_satuan[5] = {"Suhu", "Panjang", "Massa", "Waktu", "Exit"};
 static int satuan = 0;
