@@ -15,7 +15,7 @@ Suhu from_r(float R);
 
 extern char *str_suhu[4];
 extern float suhu;
-extern int satuan, from_suhu;
+extern int from_suhu;
 
 void satuan_suhu();
 

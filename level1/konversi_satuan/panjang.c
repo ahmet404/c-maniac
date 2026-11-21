@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "panjang.h"
 
 char *str_panjang[7] = {"Kilometer", "Meter", "Centimeter", "Milimeter", "Nanometer", "Kaki", "Inci"};
@@ -57,8 +56,5 @@ void satuan_panjang() {
       printf("Lagi (y/t): ");
       scanf(" %c", &opt);
     }
-  } else {
-    satuan = 0;
-    system("clear");
-  }
+  } 
 }

@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "suhu.h"
 
 
 char *str_suhu[4] = {"Celcius", "Fahrenheit", "Kelvin", "Reamur"};
 float suhu;
-int satuan, from_suhu;
+int from_suhu;
 char ops;
 
 Suhu from_cc(float C) {
@@ -41,7 +40,6 @@ Suhu from_r(float R) {
 }
 
 void satuan_suhu() {
-  char opt;
   printf("## Konversi Satuan Suhu ##\n");
   printf("===========================\n");
   for (int i=0; i<4; i++) {
@@ -79,15 +77,5 @@ void satuan_suhu() {
     printf("Kelvin\t\t: %.2f\u00B0K\n", r.kelvin);
   } else {
     printf("Inputan Angka tidak valid!\n");
-  }
-
-  printf("Lanjut (y/t): ");
-  scanf(" %c", &opt);
-  if (opt == 't' || opt == 'T') {
-    satuan = 0;
-    system("clear");
-  } else {
-    satuan = 1;
-    system("clear");
   }
 }
