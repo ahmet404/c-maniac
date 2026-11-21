@@ -46,6 +46,9 @@ int main(void) {
         satuan = 2;
         system("clear");
       }
+    }
+
+    while (satuan == 3) {
 
     }
   }
