@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "suhu/suhu.h"
 #include "panjang/panjang.h"
+#include "massa/massa.h"
 
 static const char *str_satuan[5] = {"Suhu", "Panjang", "Massa", "Waktu", "Exit"};
 static int satuan = 0;
@@ -49,7 +50,17 @@ int main(void) {
     }
 
     while (satuan == 3) {
-
+      satuan_massa();
+      char opt;
+      printf("Ingin keluar dari konversi panjang?(y/t): ");
+      scanf(" %c", &opt);
+      if (opt == 'y' || opt == 'Y') {
+        satuan = 0;
+        system("clear");
+      } else {
+        satuan = 3;
+        system("clear");
+      }
     }
   }
 
