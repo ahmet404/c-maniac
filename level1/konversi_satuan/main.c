@@ -6,9 +6,11 @@
 
 static const char *str_satuan[5] = {"Suhu", "Panjang", "Massa", "Waktu", "Exit"};
 static int satuan = 0;
+static int running = 1;
+void (*menu[])(void) = {satuan_suhu, satuan_panjang, satuan_massa};
 
 int main(void) {
-  while (satuan == 0) {
+  while (running) {
     printf("## Program Konversi Satuan ##\n");
     printf("=============================\n");
     for (int i=0; i<5; i++) {
@@ -16,52 +18,26 @@ int main(void) {
     }
     printf("Pilih satuan: ");
     scanf("%d", &satuan);
-    if (satuan > 4) {
-      exit(0);
+
+    if (satuan == 4) {
+      printf("Fitur belum tersedia, silahkan pilih satuan yg lain!\n");
     }
 
-    system("clear");
-    while (satuan == 1) {
-      satuan_suhu();
+    if (satuan == 5) {
+      exit(0);
+    }
+    
+    while (satuan > 0 && satuan <= 3) {
+      menu[satuan-1]();
       char opt;
       printf("Ingin keluar dari konversi suhu?(y/t): ");
       scanf(" %c", &opt);
       if (opt == 'y' || opt == 'Y') {
         satuan = 0;
         system("clear");
-      } else {
-        satuan = 1;
-        system("clear");
-      }
+      } 
     }
-
-    while (satuan == 2) {
-      satuan_panjang();
-      char opt;
-      printf("Ingin keluar dari konversi panjang?(y/t): ");
-      scanf(" %c", &opt);
-      if (opt == 'y' || opt == 'Y') {
-        satuan = 0;
-        system("clear");
-      } else {
-        satuan = 2;
-        system("clear");
-      }
-    }
-
-    while (satuan == 3) {
-      satuan_massa();
-      char opt;
-      printf("Ingin keluar dari konversi panjang?(y/t): ");
-      scanf(" %c", &opt);
-      if (opt == 'y' || opt == 'Y') {
-        satuan = 0;
-        system("clear");
-      } else {
-        satuan = 3;
-        system("clear");
-      }
-    }
+    system("clear");
   }
 
   return 0;

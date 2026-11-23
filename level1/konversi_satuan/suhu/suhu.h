@@ -8,12 +8,6 @@ typedef struct {
   float reamur;
 } Suhu;
 
-extern char *str_suhu[4];
-extern float suhu;
-extern int from_suhu;
-
 void satuan_suhu();
-
-
 
 #endif

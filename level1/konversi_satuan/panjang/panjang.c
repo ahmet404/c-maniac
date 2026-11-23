@@ -1,154 +1,20 @@
 #include <stdio.h>
 #include "panjang.h"
 
-char *str_panjang[7] = {"Kilometer", "Meter", "Centimeter", "Milimeter", "Nanometer", "Kaki", "Inci"};
-char *inisial[8] = {"","km", "m", "cm", "mm", "nm", "ft", "in"};
+static const char *str_panjang[] = {"Kilometer", "Meter", "Centimeter", "Milimeter", "Nanometer", "Kaki", "Inci"};
+static const char *inisial[] = {"km", "m", "cm", "mm", "nm", "ft", "in"};
+static const double to_meter[] = {1000.0, 1.0,0.01,0.001, 1e-9, 0.3048, 0.0254};
+
 int from_p, to_p;
 float panjang;
-double hasil;
+double hasil = 0.0;
 
-double from_km(float km , int n) {
-  long double hasil;
-  if (n == 2) {
-    hasil = km * 1000.0;
-  } else if (n == 3) {
-    hasil = km * 100000.0;
-  } else if (n == 4) {
-    hasil = km * 1000000.0;
-  } else if (n == 5) {
-    hasil = km * 1e12;
-  } else if (n == 6) {
-    hasil = km * 3280.84;
-  } else if (n == 7) {
-    hasil = km * 100000.0 / 2.54;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
-}
-
-double from_m (float m, int n) {
-  double hasil;
-  if (n == 1) {
-    hasil = m / 1000.0;
-  } else if (n == 3) {
-    hasil = m * 100.0;
-  } else if (n == 4) {
-    hasil = m * 1000.0;
-  } else if (n == 5) {
-    hasil = m * 1000000.0;
-  } else if (n == 6) {
-    hasil = m * 3.28084;
-  } else if (n == 7) {
-    hasil = m * 100 / 2.54;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
-}
-
-// char *str_panjang[7] = {"Kilometer", "Meter", "Centimeter", "Milimeter", "Nanometer", "Kaki", "Inci"};
-double from_cm (float cm, int n) {
-  double hasil;
-  if (n == 1) {
-    hasil = cm / 100000.0;
-  } else if (n == 2) {
-    hasil = cm / 100;
-  } else if (n == 4) {
-    hasil = cm * 10;
-  } else if (n == 5) {
-    hasil = cm * 1000000.0;
-  } else if (n == 6) {
-    hasil = cm * 0.0328084;
-  } else if (n == 7) {
-    hasil = cm / 2.54;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
-}
-
-double from_mm (float mm, int n) {
-  double hasil;
-  if (n == 1) {
-    hasil = mm / 1000000.0;
-  } else if (n == 2) {
-    hasil = mm / 1000;
-  } else if (n == 3) {
-    hasil = mm / 10;
-  } else if (n == 5) {
-    hasil = mm * 1000000.0;
-  } else if (n == 6) {
-    hasil = mm * 0.00328084;
-  } else if (n == 7) {
-    hasil = mm / 10 / 2.54;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
-}
-
-double from_nm (float nm, int n) {
-  double hasil;
-  if (n == 1) {
-    hasil = nm / 1e12;
-  } else if (n == 2) {
-    hasil = nm / 1e9;
-  } else if (n == 3) {
-    hasil = nm / 10000000.0;
-  } else if (n == 4) {
-    hasil = nm / 1000000.0;
-  } else if (n == 6) {
-    hasil = nm * 0.00000000328084;
-  } else if (n == 7) {
-    hasil = nm / 10000000.0 / 2.54;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
-}
-
-double from_ft (float ft, int n) {
-  double hasil;
-  if (n == 1) {
-    hasil = ft * 0.0003048;
-  } else if (n == 2) {
-    hasil = ft * 0.3048;
-  } else if (n == 3) {
-    hasil = ft * 30.48;
-  } else if (n == 4) {
-    hasil = ft * 304.8;
-  } else if (n == 5) {
-    hasil = ft * 304800000.0;
-  } else if (n == 7) {
-    hasil = ft * 12;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
-}
-
-double from_in (float in, int n) {
-  double hasil;
-  if (n == 1) {
-    hasil = in * 0.0000254;
-  } else if (n == 2) {
-    hasil = in * 0.0254;
-  } else if (n == 3) {
-    hasil = in * 2.54;
-  } else if (n == 4) {
-    hasil = in * 25.4;
-  } else if (n == 5) {
-    hasil = in * 25400000.0;
-  } else if (n == 6) {
-    hasil = in / 12;
-  } else {
-    printf("Inputan tidak valid!\n");
-  }
-  return hasil;
+double konversi_panjang(double nilai, int from, int to) {
+  return nilai * to_meter[from] / to_meter[to];
 }
 
 void satuan_panjang() {
+  char opt = 'y';
   printf("## Konversi Satuan Suhu ##\n");
   printf("===========================\n");
   for (int i=0; i<7; i++) {
@@ -157,80 +23,17 @@ void satuan_panjang() {
   printf("Conversion from: ");
   scanf("%d", &from_p);
 
-  printf("Input panjang %s: ", inisial[from_p]);
-  scanf("%f", &panjang);
-  printf("## Conversion from %s ##\n", inisial[from_p]);
-  printf("========================\n");
+  printf("To: ");
+  scanf("%d", &to_p);
+  while (opt == 'y' || opt == 'Y') {
+    printf("Input panjang (%s): ", inisial[from_p-1]);
+    scanf("%f", &panjang);
 
-  char opt = 'Y';
-  if (from_p == 1) {
-    while (opt == 'Y' || opt == 'y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_km(panjang, to_p);
-      printf("%.2f km = %.2f %s\n", panjang, hasil,inisial[to_p]);
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
-  } else if (from_p == 2) {
-    while (opt == 'y' || opt == 'Y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_m(panjang, to_p);
-      printf("%.2f m = %.2f %s\n", panjang, hasil,inisial[to_p]);
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
-  } else if (from_p == 3) {
-    while (opt == 'y' || opt == 'Y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_cm(panjang, to_p);
-      printf("%.2f cm = %.2f %s\n", panjang, hasil,inisial[to_p]);
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
-  } else if (from_p == 4) {
-    while (opt == 'y' || opt == 'Y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_mm(panjang, to_p);
-      printf("%.2f mm = %.2f %s\n", panjang, hasil,inisial[to_p]);
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
-  } else if (from_p == 5) {
-    while (opt == 'y' || opt == 'Y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_nm(panjang, to_p);
-      if (to_p == 1) {
-        printf("%.2f nm = %.12f %s\n", panjang, hasil,inisial[to_p]);
-      } else if (to_p == 4){
-        printf("%.2f nm = %f %s\n", panjang, hasil,inisial[to_p]);
-      } else {
-        printf("%.2f nm = %.9f %s\n", panjang, hasil,inisial[to_p]);
-      }
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
-  } else if (from_p == 6) {
-    while (opt == 'y' || opt == 'Y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_ft(panjang, to_p);
-      printf("%.2f ft = %.2f %s\n", panjang, hasil,inisial[to_p]);
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
-  } else if (from_p == 7) {
-    while (opt == 'y' || opt == 'Y') {
-      printf("To: ");
-      scanf("%d", &to_p);
-      hasil = from_in(panjang, to_p);
-      printf("%.2f in = %.2f %s\n", panjang, hasil,inisial[to_p]);
-      printf("Lagi (y/t): ");
-      scanf(" %c", &opt);
-    }
+    printf("\n## %s to %s ##\n", inisial[from_p-1], inisial[to_p-1]);
+    printf("==============\n");
+    hasil = konversi_panjang(panjang, from_p-1, to_p-1);
+    printf("%g %s = %g %s\n", panjang, inisial[from_p-1], hasil, inisial[to_p-1]);
+    printf("Lagi (y/t): ");
+    scanf(" %c", &opt);
   }
 }

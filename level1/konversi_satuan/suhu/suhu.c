@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "suhu.h"
 
-
 char *str_suhu[4] = {"Celcius", "Fahrenheit", "Kelvin", "Reamur"};
 float suhu;
 int from_suhu;
@@ -17,8 +16,8 @@ Suhu from_cc(float C) {
 
 Suhu from_f(float F) {
   Suhu f;
-  f.celcius = (F-32) * 1.8;
-  f.kelvin = (F-32) * 1.8 + 273.15;
+  f.celcius = (F-32) / 1.8;
+  f.kelvin = (F-32) / 1.8 + 273.15;
   f.reamur = (F-32) * (4.00/9.00);
   return f;
 }

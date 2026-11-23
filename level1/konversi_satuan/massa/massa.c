@@ -4,6 +4,7 @@
 char *str_massa[5] = {"Ton", "Kilogram", "Gram", "Miligram", "Pon"};
 int from_massa;
 float berat;
+enum { TON, KILOGRAM, GRAM, MILIGRAM, PON };
 
 // Massa Ton
 Massa buat_ton(float ton) {
@@ -90,10 +91,10 @@ Massa buat_pound(float p) {
 void tampilkan_pound(float berat) {
   Massa g = buat_pound(berat);
   printf("From Pound: \n");
-  printf("%.0f lb = %f ton\n", berat, g.ton);
-  printf("%.0f lb = %f kg\n",berat, g.kg);
-  printf("%.0f lb = %f g\n",berat, g.gram);
-  printf("%.0f lb = %f mg\n",berat, g.mg);
+  printf("%g lb = %f ton\n", berat, g.ton);
+  printf("%g lb = %f kg\n",berat, g.kg);
+  printf("%g lb = %f g\n",berat, g.gram);
+  printf("%g lb = %f mg\n",berat, g.mg);
 }
 
 // fungsi nampilkan massa
@@ -110,15 +111,15 @@ void satuan_massa() {
   scanf("%f", &berat);
   printf("===========================\n");
 
-  if (from_massa == 1) {
+  if (from_massa == TON) {
     tampilkan_ton(berat);
-  } else if (from_massa == 2) {
+  } else if (from_massa == KILOGRAM) {
     tampilkan_kg(berat);
-  } else if (from_massa == 3) {
+  } else if (from_massa == GRAM) {
     tampilkan_gram(berat);
-  } else if (from_massa == 4) {
+  } else if (from_massa == MILIGRAM) {
     tampilkan_mg(berat);
-  } else if (from_massa == 5) {
+  } else if (from_massa == PON) {
     tampilkan_pound(berat);
   }
 }
