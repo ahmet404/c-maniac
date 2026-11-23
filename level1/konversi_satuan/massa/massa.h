@@ -2,11 +2,11 @@
 #define MASSA_H
 
 typedef struct { 
-  float ton;
-  float kg;
-  float gram;
-  float mg;
-  float pon;
+  double ton;
+  double kg;
+  double gram;
+  double mg;
+  double pon;
 } Massa;
 
 
