@@ -1,10 +1,12 @@
 #include <stdio.h>
 
+// fungsi cek bilangan prima
+// fungsi tersebut akan mengembalikan nilai 1 jika bilangan prima dan 0 bukan bilangan prima
 int is_prime(int n) {
   if (n < 2) return 0;
   for (int i=2; i<n; i++) {
     if (n % i == 0) return 0;
-  }
+  } 
   return 1;
 }
 
@@ -15,8 +17,8 @@ int main(void) {
   // input angka yg ingin di cek
   int num;
   printf("Input angka: ");
-  scanf("%d", &num);
 
+  scanf("%d", &num);
   // defenisikan variable sebagai flag / penanda
   int prime = 1;
 
@@ -51,6 +53,7 @@ int main(void) {
 
   
 
+  printf("\nMenampilkan deret bilangan prima sampai n\n");
   // menampilkan deret bilangan prima sampai n
   // deklarasi variable counter untuk deret angka dan pembagi 
   int n, p;
@@ -68,30 +71,28 @@ int main(void) {
 
     }
 
-    // cek apakah pembagi sama dengan bilangan
+    // cek apakah pembagi sama dengan bilangan, jika ya cetak angka
     if (p == n) {
       printf("%d ", n);
     }
   }
 
 
-  // menampilkan deret bilangan prima sebanyak n
-  
-  int batas;
-  int counter=1;
-  printf("\nMau nampilin bilangan prima berapa banyak? ");
-  scanf("%d", &batas);
+  // menampilkan deret bilangan prima sebanyak n 
+  int jumlah;
+  printf("\n\nBerapa banyak bilangan prima yg mau di cetak? ");
+  scanf("%d", &jumlah);
 
-  int angka=2;
-  while (counter <= batas) {
-    if (is_prime(angka)) {
-      printf("%d ", angka);
+  int counter=1;
+  int number;
+
+  while (counter <= jumlah) {
+    if (is_prime(number)) {
+      printf("%d ", number);
       counter++;
     }
-    angka++;
+    number++;
   }
-
-
   
   return 0;
 }
